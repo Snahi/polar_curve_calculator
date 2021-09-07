@@ -1,0 +1,10 @@
+{
+  "appName": "Polar Curve Calculator",
+  "@appName": {
+    "description": "Name of the app"
+  },
+  "wingsScreenTitle": "Your wings",
+  "@wingsScreenTitle": {
+    "description": "Text which is displayed in the header of the WingsScreen"
+  }
+}
