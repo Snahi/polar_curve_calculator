@@ -1,6 +1,7 @@
 scellaneous
 *.class
 *.lock
+!Gemfile.lock
 *.log
 *.pyc
 *.swp
