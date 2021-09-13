@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:polar_curve_calculator/app_router.dart';
 import 'package:polar_curve_calculator/l10n/s.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  AppRouter _appRouter = AppRouter();
+
+  @override
+  void initState() {
+    super.initState();
+    _appRouter.init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,6 +32,10 @@ class MyApp extends StatelessWidget {
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+          backwardsCompatibility: false,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+        ),
       ),
       localizationsDelegates: [
         AppLocalizations.delegate,
@@ -28,8 +46,15 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('en', ''),
       ],
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: AppRouter.splash,
+      onGenerateRoute: _appRouter.generateRoute,
     );
+  }
+
+  @override
+  void dispose() {
+    _appRouter.close();
+    super.dispose();
   }
 }
 
